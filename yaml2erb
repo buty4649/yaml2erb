@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'YAML'
+require 'erb'
+require 'ostruct'
+
+yamlfile = ARGV[0]
+erbfile = ARGV[1]
+
+yaml = YAML.load_file(yamlfile)
+erb = ERB.new(File.read(erbfile))
+puts erb.result(OpenStruct.new(yaml).instance_eval{binding})
